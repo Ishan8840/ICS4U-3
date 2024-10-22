@@ -1,46 +1,100 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    padding: 0 20px;
 }
+
+.container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 
 form {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 350px;
+    margin: 10px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
+
+form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
 
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    color: #333;
 }
+
 
 input[type="number"],
 input[type="text"] {
-    width: 95%;
-    padding: 8px;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s ease-in-out;
+}
+
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+    border-color: #4CAF50;
+    outline: none;
 }
 
 input[type="submit"] {
     background-color: #4CAF50;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
-    width: 100%;
-    border-radius: 4px;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 input[type="submit"]:hover {
     background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+input[type="submit"]:focus {
+    outline: 2px solid #4CAF50;
+}
+
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    form {
+        max-width: 100%;
+    }
 }

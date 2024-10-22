@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,71 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
+
 <body>
-    <form action="">
-        <label for="a">Enter value for A:</label>
-        <input type="number" id="a" required value="0">
-        
-        <label for="b">Enter value for B:</label>
-        <input type="number" id="b" required value="0">
-        
-        <label for="c">Enter value for C:</label>
-        <input type="number" id="c" required value="0">
-        
-        <label for="result">Result:</label>
-        <input type="text" id="result" required readonly>
-        
-        <input type="submit" value="Calculate">
-    </form>
+    <div class="container">
+        <div class="heron-container">
+            <form id="heron" action="">
+                <h2 class="heron-label">Heron's Formula</h2>
+
+                <label for="heron-a">side-a:</label>
+                <input type="number" id="heron-a" required value="0" min="0">
+
+                <label for="heron-b">side-b:</label>
+                <input type="number" id="heron-b" required value="0" min="0">
+
+                <label for="heron-c">side-c:</label>
+                <input type="number" id="heron-c" required value="0" min="0">
+
+                <label for="heron-result">Area Result:</label>
+                <input type="text" id="heron-result" required readonly>
+
+                <input type="submit" value="Calculate">
+            </form>
+        </div>
+
+        <div class="ambig-container">
+            <form id="ambig" action="">
+                <h2 class="ambig-label">Ambiguous Case</h2>
+
+                <label for="ambig-angle-A">Angle A:</label>
+                <input type="number" id="ambig-angle-A" required value="0" min="0">
+
+                <label for="ambig-side-a">side a:</label>
+                <input type="number" id="ambig-side-a" required value="0" min="0">
+
+                <label for="ambig-side-b">side b:</label>
+                <input type="number" id="ambig-side-b" required value="0" min="0">
+
+                <label for="ambig-result">Triangle Type:</label>
+                <input type="text" id="ambig-result" required readonly>
+
+                <input type="submit" value="Calculate">
+            </form>
+        </div>
+
+        <div class="poly-container">
+            <form id="poly" action="">
+                <h2 class="poly-label">Newton's Method</h2>
+
+                <label for="poly-coeff">Coefficients:</label>
+                <input type="text" id="poly-coeff" required value="0">
+
+                <label for="poly-exp">Exponents:</label>
+                <input type="text" id="poly-exp" required value="0">
+
+                <label for="poly-x">x value:</label>
+                <input type="number" id="poly-x" required value="0">
+
+                <label for="poly-result">Result:</label>
+                <input type="text" id="poly-result" required readonly>
+
+                <input type="submit" value="Calculate">
+            </form>
+        </div>
+    </div>
+
+
 </body>
+
 </html>
