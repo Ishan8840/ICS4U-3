@@ -51,18 +51,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('poly').addEventListener('submit', function (event) {
         event.preventDefault();
 
-        const coeff = document.getElementById("poly-coeff").value;
-        const exp = document.getElementById("poly-exp").value;
+        const coeff = document.getElementById("poly-coeff").value.split(' ').map(Number);
+        const exp = document.getElementById("poly-exp").value.split(' ').map(Number);
         const x = parseFloat(document.getElementById("poly-x").value);
 
-        const arrCoeff = [coeff.split(' ')];
-        const arrExp = [exp.split(' ')];
         let poly = 0;
 
-        for (let i=0; i<arrCoeff.length; i++) {
-            poly = poly + arrCoeff[i]*x**arrExp[i]
+        for (let i = 0; i < coeff.length; i++) {
+            poly += coeff[i] * Math.pow(x, exp[i]);
         }
 
-        document.getElementById("poly-result").value = poly;
+        document.getElementById("poly-result").value = poly.toFixed(2);
     });
 });
