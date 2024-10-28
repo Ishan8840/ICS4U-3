@@ -66,22 +66,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('newt').addEventListener('submit', function (event) {
         event.preventDefault();
-
-        const zeroX = parseFloat(document.getElementById("newt-g").value);
+    
+        let zeroX = parseFloat(document.getElementById("newt-g").value);
 
         let func = [6, -13, -18, 7, 6];
         let dFunc = [24, -39, -36, 7];
 
-        let funcValue = 0;
-        let dFuncValue = 0;
-
-        for (let i = 0; i < func.length; i++) {
-            funcValue += func[i] * Math.pow(x, (func.length-i));
-            if (i < dFunc.length){
-                dFuncValue += dFunc[i] * Math.pow(x, (func.length-i));
+        let tolerance = 1e-8;
+        let maxIterations = 100;
+        let iteration = 0;
+    
+        while (iteration < maxIterations) {
+            let funcValue = 0;
+            let dFuncValue = 0;
+    
+            for (let i = 0; i < func.length; i++) {
+                funcValue += func[i] * Math.pow(zeroX, (func.length - i - 1));
+                if (i < dFunc.length) {
+                    dFuncValue += dFunc[i] * Math.pow(zeroX, (dFunc.length - i - 1));
+                }
             }
+    
+            let nextX = zeroX - (funcValue / dFuncValue);
+    
+            if (Math.abs(funcValue) < tolerance) {
+                break;
+            }
+    
+            zeroX = nextX;
+            iteration++;
         }
-
-        document.getElementById("poly-result").value = poly.toFixed(2);
-    });
+    
+        document.getElementById("newt-result").value = zeroX.toFixed(2);
+    });    
 });
