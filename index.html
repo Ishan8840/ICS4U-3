@@ -53,7 +53,7 @@
 
         <div class="poly-container">
             <form id="poly" action="">
-                <h2 class="poly-label">Polynomial</h2>
+                <h2 class="poly-label">Polynomial Function</h2>
 
                 <label for="poly-coeff">Coefficients:</label>
                 <input type="text" id="poly-coeff" required value="0">
@@ -66,6 +66,20 @@
 
                 <label for="poly-result">Result:</label>
                 <input type="text" id="poly-result" required readonly>
+
+                <input type="submit" value="Calculate">
+            </form>
+        </div>
+
+        <div class="newt-container">
+            <form id="newt" action="">
+                <h2 class="newt-label">Newtons Method</h2>
+
+                <label for="newt-g">Root Guess:</label>
+                <input type="text" id="newt-g" required value="0">
+
+                <label for="newt-result">Root Aproximation:</label>
+                <input type="text" id="newt-result" required readonly>
 
                 <input type="submit" value="Calculate">
             </form>

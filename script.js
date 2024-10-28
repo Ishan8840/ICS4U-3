@@ -63,4 +63,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById("poly-result").value = poly.toFixed(2);
     });
+
+    document.getElementById('newt').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const zeroX = parseFloat(document.getElementById("newt-g").value);
+
+        let func = [6, -13, -18, 7, 6];
+        let dFunc = [24, -39, -36, 7];
+
+        let funcValue = 0;
+        let dFuncValue = 0;
+
+        for (let i = 0; i < func.length; i++) {
+            funcValue += func[i] * Math.pow(x, (func.length-i));
+            if (i < dFunc.length){
+                dFuncValue += dFunc[i] * Math.pow(x, (func.length-i));
+            }
+        }
+
+        document.getElementById("poly-result").value = poly.toFixed(2);
+    });
 });
