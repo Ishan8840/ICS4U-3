@@ -1,100 +1,69 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
 }
 
 .container {
-    display: flex;
-    gap: 30px;
-    width: 100%;
-    max-width: 900px;
-    justify-content: center;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
 }
-
 
 form {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    width: 100%;
-    max-width: 350px;
-    margin: 10px;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-form:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-}
-
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
     color: #333;
 }
 
-
-input[type="number"],
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    background-color: #f9f9f9;
-    transition: border-color 0.2s ease-in-out;
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #555;
 }
 
-
-input[type="number"]:focus,
-input[type="text"]:focus {
-    border-color: #4CAF50;
-    outline: none;
+input[type="number"],
+input[type="text"],
+textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #28a745;
     color: white;
+    padding: 10px 15px;
     border: none;
-    padding: 12px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
-    transform: translateY(-2px);
+    background-color: #218838;
 }
 
-input[type="submit"]:focus {
-    outline: 2px solid #4CAF50;
+input[readonly] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
 }
 
-@media (max-width: 800px) {
-    .container {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    form {
-        max-width: 100%;
-    }
-}
+textarea {
+    resize: none;
+  }

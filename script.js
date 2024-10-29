@@ -55,13 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const exp = document.getElementById("poly-exp").value.split(' ').map(Number);
         const x = parseFloat(document.getElementById("poly-x").value);
 
-        let poly = 0;
+        let p = ["f(x) = ", ""]
+
+        let polyValue = 0;
 
         for (let i = 0; i < coeff.length; i++) {
-            poly += coeff[i] * Math.pow(x, exp[i]);
+
+            if (i > 0) {
+                p[0] += coeff[i] > 0 ? " + " : " - ";
+            }
+            p[0] += `${Math.abs(coeff[i])}x^${exp[i]}`
+
+            
+            polyValue += coeff[i] * Math.pow(x, exp[i]);
+            p[1] =  `f(${x}) = ${polyValue.toFixed(2)}`;
         }
 
-        document.getElementById("poly-result").value = poly.toFixed(2);
+        document.getElementById("poly-result").value = p.join('\n');
     });
 
     document.getElementById('newt').addEventListener('submit', function (event) {
