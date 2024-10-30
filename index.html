@@ -4,89 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Mathematical Calculators</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="heron-container">
-            <form id="heron" action="">
-                <h2 class="heron-label">Heron's Formula</h2>
-
-                <label for="heron-a">side-a:</label>
+        <form id="heron" class="calculator-form">
+            <fieldset>
+                <legend>Heron's Formula</legend>
+                <label for="heron-a">Side A:</label>
                 <input type="number" id="heron-a" required value="0" min="0">
 
-                <label for="heron-b">side-b:</label>
+                <label for="heron-b">Side B:</label>
                 <input type="number" id="heron-b" required value="0" min="0">
 
-                <label for="heron-c">side-c:</label>
+                <label for="heron-c">Side C:</label>
                 <input type="number" id="heron-c" required value="0" min="0">
 
                 <label for="heron-result">Area Result:</label>
                 <input type="text" id="heron-result" required readonly>
 
                 <input type="submit" value="Calculate">
-            </form>
-        </div>
+            </fieldset>
+        </form>
 
-        <div class="ambig-container">
-            <form id="ambig" action="">
-                <h2 class="ambig-label">Ambiguous Case</h2>
-
+        <form id="ambig" class="calculator-form">
+            <fieldset>
+                <legend>Ambiguous Case</legend>
                 <label for="ambig-angle-A">Angle A:</label>
-                <input type="number" id="ambig-angle-A" required value="0" min="0">
+                <input type="number" id="ambig-angle-A" required value="0" min="1" max="179">
 
-                <label for="ambig-side-a">side a:</label>
-                <input type="number" id="ambig-side-a" required value="0" min="0">
+                <label for="ambig-side-a">Side A:</label>
+                <input type="number" id="ambig-side-a" required value="0" min="0"  step="0.01">
 
-                <label for="ambig-side-b">side b:</label>
-                <input type="number" id="ambig-side-b" required value="0" min="0">
+                <label for="ambig-side-b">Side B:</label>
+                <input type="number" id="ambig-side-b" required value="0" min="0"  step="0.01">
 
                 <label for="ambig-result">Triangle Type:</label>
                 <input type="text" id="ambig-result" required readonly>
 
                 <input type="submit" value="Calculate">
-            </form>
-        </div>
+            </fieldset>
+        </form>
 
-        <div class="poly-container">
-            <form id="poly" action="">
-                <h2 class="poly-label">Polynomial Function</h2>
-
-                <label for="poly-coeff">Coefficients:</label>
+        <form id="poly" class="calculator-form">
+            <fieldset>
+                <legend>Polynomial Function</legend>
+                <label for="poly-coeff">Coefficients (space-separated):</label>
                 <input type="text" id="poly-coeff" required value="0">
 
-                <label for="poly-exp">Exponents:</label>
+                <label for="poly-exp">Exponents (space-separated):</label>
                 <input type="text" id="poly-exp" required value="0">
 
-                <label for="poly-x">x value:</label>
+                <label for="poly-x">X value:</label>
                 <input type="number" id="poly-x" required value="0" step="0.01">
 
                 <label for="poly-result">Result:</label>
-                <textarea id="poly-result" required readonly resize: none></textarea>
+                <textarea id="poly-result" required readonly></textarea>
 
                 <input type="submit" value="Calculate">
-            </form>
-        </div>
+            </fieldset>
+        </form>
 
-        <div class="newt-container">
-            <form id="newt" action="">
-                <h2 class="newt-label">Newtons Method</h2>
-
+        <form id="newt" class="calculator-form">
+            <fieldset>
+                <legend>Newton's Method</legend>
                 <label for="newt-g">Root Guess:</label>
                 <input type="text" id="newt-g" required value="0">
 
-                <label for="newt-result">Root Aproximation:</label>
+                <label for="newt-result">Root Approximation:</label>
                 <input type="text" id="newt-result" required readonly>
 
                 <input type="submit" value="Calculate">
-            </form>
-        </div>
+            </fieldset>
+        </form>
     </div>
-
-
 </body>
 
 </html>
