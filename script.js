@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let response;
 
+        // change polynomial to make it right
+
         if (A < 90) {
             if (a < h) {
                 response = "No Triangle";
