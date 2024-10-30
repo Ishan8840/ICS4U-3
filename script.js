@@ -22,20 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let response;
 
-        // change polynomial to make it right
-
         if (A < 90) {
             if (a < h) {
                 response = "No Triangle";
             } else if (a === h) {
                 response = "Right Triangle";
-            } else if (a > b) {
+            } else if (a >= b) {
                 response = "One Triangle";
-            } else if (h < a && a < b) {
+            } else {
                 response = "Two Triangles (ambiguous)";
             }
         } else {
-            response = (sideA <= height) ? "No Triangle" : "One Triangle";
+            response = (a <= b) ? "No Triangle" : "One Triangle";
         }
 
         document.getElementById("ambig-result").value = response;
