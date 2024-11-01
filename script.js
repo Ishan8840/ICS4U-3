@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const polyForm = document.getElementById('poly');
     const polyResult = document.getElementById("poly-result");
+    const polyValue = document.getElementById("poly-result-value");
 
     const newtonForm = document.getElementById('newt');
     const newtonResult = document.getElementById("newt-result");
@@ -42,7 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
             expression[1] += c * (x ** exp[i]);
         });
 
-        return `${expression[0]}\nf(${x}) = ${expression[1].toFixed(2)}`;
+        return {
+            expression: `${expression[0]}`,
+            value: `f(${x}) = ${expression[1].toFixed(2)}`
+        };
     }
 
     function newtonMethod(initialGuess) {
@@ -89,7 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const coeff = polyForm.elements["poly-coeff"].value.split(' ').map(Number);
         const exp = polyForm.elements["poly-exp"].value.split(' ').map(Number);
         const x = parseFloat(polyForm.elements["poly-x"].value);
-        polyResult.value = evaluatePolynomial(coeff, exp, x);
+
+        const result = evaluatePolynomial(coeff, exp, x);
+        polyResult.value = result.expression;
+        polyValue.value = result.value;
     });
 
     newtonForm.addEventListener('submit', function (event) {
