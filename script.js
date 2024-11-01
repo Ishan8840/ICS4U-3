@@ -29,16 +29,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function evaluatePolynomial(coeff, exp, x) {
-        let expression = "f(x) = ";
-        let polyValue = 0;
+        let expression = ["f(x) = ", 0];
 
         coeff.forEach((c, i) => {
-            expression += (c >= 0 && i > 0 ? " + " : "") + (c === 1 && exp[i] !== 0 ? "" : Math.abs(c));
-            expression += exp[i] === 0 ? "" : exp[i] === 1 ? "x" : `x^${exp[i]}`;
-            polyValue += c * (x ** exp[i]);
+
+            expression[0] += (i > 0 ? (c >= 0 ? " + " : " - ") : "") + (Math.abs(c) === 1 && exp[i] !== 0 ? "" : Math.abs(c));
+            expression[0] += exp[i] === 0 ? "" : exp[i] === 1 ? "x" : `x^${exp[i]}`;
+            expression[1] += c * (x ** exp[i]);
         });
 
-        return `${expression}\nf(${x}) = ${polyValue.toFixed(2)}`;
+        return `${expression[0]}\nf(${x}) = ${expression[1].toFixed(2)}`;
     }
 
     function newtonMethod(initialGuess) {
