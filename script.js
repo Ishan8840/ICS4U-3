@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function calculateAmbiguousCase(A, a, b) {
         const h = b * Math.sin(A * (Math.PI / 180));
         if (A === 90) {
-            return (a <= b) ? "No Triangle" : "Right Triangle";
+            return (a > b) ? "Right Triangle" : "No Triangle";
         } else if (A < 90) {
             if (a < h) return "No Triangle";
             if (a === h) return "Right Triangle";
