@@ -1,107 +1,96 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('heron').addEventListener('submit', function (event) {
-        event.preventDefault();
+    const heronForm = document.getElementById('heron');
+    const heronResult = document.getElementById("heron-result");
 
-        const a = parseFloat(document.getElementById("heron-a").value);
-        const b = parseFloat(document.getElementById("heron-b").value);
-        const c = parseFloat(document.getElementById("heron-c").value);
+    const ambigForm = document.getElementById('ambig');
+    const ambigResult = document.getElementById("ambig-result");
 
-        const response = Math.sqrt((4 * a * a * b * b) - Math.pow(a * a + b * b - c * c, 2)) / 4;
+    const polyForm = document.getElementById('poly');
+    const polyResult = document.getElementById("poly-result");
 
-        document.getElementById("heron-result").value = response.toFixed(2);
-    });
+    const newtonForm = document.getElementById('newt');
+    const newtonResult = document.getElementById("newt-result");
 
-    document.getElementById('ambig').addEventListener('submit', function (event) {
-        event.preventDefault();
+    function calculateHeron(a, b, c) {
+        return 0.25 * Math.sqrt(4 * a * a * b * b - Math.pow(a * a + b * b - c * c, 2));
+    }
 
-        const A = parseFloat(document.getElementById("ambig-angle-A").value);
-        const a = parseFloat(document.getElementById("ambig-side-a").value);
-        const b = parseFloat(document.getElementById("ambig-side-b").value);
-
+    function calculateAmbiguousCase(A, a, b) {
         const h = b * Math.sin(A * (Math.PI / 180));
-
-        let response;
-
-        if (A < 90) {
-            if (a < h) {
-                response = "No Triangle";
-            } else if (a === h) {
-                response = "Right Triangle";
-            } else if (a >= b) {
-                response = "One Triangle";
-            } else {
-                response = "Two Triangles (ambiguous)";
-            }
+        if (A === 90) {
+            return (a <= b) ? "No Triangle" : "Right Triangle";
+        } else if (A < 90) {
+            if (a < h) return "No Triangle";
+            if (a === h) return "Right Triangle";
+            return (a >= b) ? "One Triangle" : "Two Triangles (ambiguous)";
         } else {
-            response = (a <= b) ? "No Triangle" : "One Triangle";
+            return (a <= b) ? "No Triangle" : "One Triangle";
         }
+    }
 
-        document.getElementById("ambig-result").value = response;
-    });
-
-    document.getElementById('poly').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        const coeff = document.getElementById("poly-coeff").value.split(' ').map(Number);
-        const exp = document.getElementById("poly-exp").value.split(' ').map(Number);
-        const x = parseFloat(document.getElementById("poly-x").value);
-
-        let p = ["f(x) = ", ""]
+    function evaluatePolynomial(coeff, exp, x) {
+        let expression = "f(x) = ";
         let polyValue = 0;
 
         coeff.forEach((c, i) => {
-
-            if (i > 0) {
-                p[0] += (c > 0 ? " + " : " - ");
-            }
-
-            const absCoeff = Math.abs(c);
-            const expStr = exp[i] === 0 ? "" :
-                exp[i] === 1 ? "x" :
-                    `x^${exp[i]}`;
-
-            p[0] += (c === 1 && exp[i] !== 0 ? "" : absCoeff) + expStr;
-
-            polyValue += c * Math.pow(x, exp[i]);
+            expression += (c >= 0 && i > 0 ? " + " : "") + (c === 1 && exp[i] !== 0 ? "" : Math.abs(c));
+            expression += exp[i] === 0 ? "" : exp[i] === 1 ? "x" : `x^${exp[i]}`;
+            polyValue += c * (x ** exp[i]);
         });
 
-        p[1] = `f(${x}) = ${polyValue.toFixed(2)}`;
+        return `${expression}\nf(${x}) = ${polyValue.toFixed(2)}`;
+    }
 
-        document.getElementById("poly-result").value = p.join('\n');
-    });
+    function newtonMethod(initialGuess) {
+        let currentGuess = parseFloat(initialGuess);
+        const func = [6, -13, -18, 7, 6];
+        const dFunc = [24, -39, -36, 7];
+        const tolerance = 1e-8;
+        const maxIterations = 100;
 
-    document.getElementById('newt').addEventListener('submit', function (event) {
-        event.preventDefault();
+        for (let i = 0; i < maxIterations; i++) {
+            let funcValue = 0, dFuncValue = 0;
 
-        let zeroX = parseFloat(document.getElementById("newt-g").value);
+            func.forEach((coef, x) => {
+                funcValue += coef * (currentGuess ** (func.length - x - 1));
+                if (x < dFunc.length) dFuncValue += dFunc[x] * (currentGuess ** (dFunc.length - x - 1));
+            });
 
-        let func = [6, -13, -18, 7, 6];
-        let dFunc = [24, -39, -36, 7];
-        let tolerance = 1e-8;
-        let maxIterations = 100;
-        let iteration = 0;
+            if (Math.abs(funcValue) < tolerance) break;
 
-        while (iteration < maxIterations) {
-            let funcValue = 0;
-            let dFuncValue = 0;
-
-            for (let i = 0; i < func.length; i++) {
-                funcValue += func[i] * Math.pow(zeroX, (func.length - i - 1));
-                if (i < dFunc.length) {
-                    dFuncValue += dFunc[i] * Math.pow(zeroX, (dFunc.length - i - 1));
-                }
-            }
-
-            let nextX = zeroX - (funcValue / dFuncValue);
-
-            if (Math.abs(funcValue) < tolerance) {
-                break;
-            }
-
-            zeroX = nextX;
-            iteration++;
+            currentGuess -= funcValue / dFuncValue;
         }
 
-        document.getElementById("newt-result").value = zeroX.toFixed(2);
+        return currentGuess.toFixed(2);
+    }
+
+    heronForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const a = parseFloat(heronForm.elements["heron-a"].value);
+        const b = parseFloat(heronForm.elements["heron-b"].value);
+        const c = parseFloat(heronForm.elements["heron-c"].value);
+        heronResult.value = calculateHeron(a, b, c).toFixed(2);
+    });
+
+    ambigForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const A = parseFloat(ambigForm.elements["ambig-angle-A"].value);
+        const a = parseFloat(ambigForm.elements["ambig-side-a"].value);
+        const b = parseFloat(ambigForm.elements["ambig-side-b"].value);
+        ambigResult.value = calculateAmbiguousCase(A, a, b);
+    });
+
+    polyForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const coeff = polyForm.elements["poly-coeff"].value.split(' ').map(Number);
+        const exp = polyForm.elements["poly-exp"].value.split(' ').map(Number);
+        const x = parseFloat(polyForm.elements["poly-x"].value);
+        polyResult.value = evaluatePolynomial(coeff, exp, x);
+    });
+
+    newtonForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const initialGuess = newtonForm.elements["newt-g"].value;
+        newtonResult.value = newtonMethod(initialGuess);
     });
 });
