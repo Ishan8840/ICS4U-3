@@ -33,7 +33,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         coeff.forEach((c, i) => {
 
-            expression[0] += (i > 0 ? (c >= 0 ? " + " : " - ") : "") + (Math.abs(c) === 1 && exp[i] !== 0 ? "" : Math.abs(c));
+            if (i > 0) {
+                expression[0] += (c >= 0 ? " + " : " - ");
+            }
+
+            expression[0] += Math.abs(c) === 1 && exp[i] !== 0 ? "" : Math.abs(c);
             expression[0] += exp[i] === 0 ? "" : exp[i] === 1 ? "x" : `x^${exp[i]}`;
             expression[1] += c * (x ** exp[i]);
         });
